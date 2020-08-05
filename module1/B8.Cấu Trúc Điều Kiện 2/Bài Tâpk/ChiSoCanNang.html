@@ -5,19 +5,34 @@
     <title>Title</title>
 </head>
 <body>
-<table>
-    <tr>
-        <th>BMI</th>
-        <th> Interpretation</th>
-    </tr>
-    <tr>
-        <th> BMI < 18.5</th>
-    </tr>
-</table>
+<form action=" ">
+    <label for="height"> Chiều Cao:  </label>
+    <input type="number" name="height" id="height" >
+    <br>     <br>
+
+    <label for="weight"> Cân Nặng :</label>
+    <input type="number" name="weight" id="weight">
+    <br>  <br>
+    <button type="button" onclick="calulatorBMI()"> Tính Chỉ Số BMI</button>
+</form>
 </body>
 <script>
-    let weight ;
-    let height;
+    function calulatorBMI(){
+        let height = parseInt(document.getElementById("height").value);
+        let weight = parseInt(document.getElementById("weight").value);
+        let bmi = weight/(height * 2);
+        if (bmi < 18)
+            document.write("Underweight");
+        else if (bmi < 25.0)
+            document.write("Normal");
+        else if (bmi < 30.0)
+            document.write("Overweight");
+        else
+            document.write("Obese");
+
+
+    }
+
 
 </script>
 </html>
