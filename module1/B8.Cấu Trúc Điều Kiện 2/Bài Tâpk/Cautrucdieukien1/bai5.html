@@ -6,7 +6,22 @@
 </head>
 <body>
 <script>
-    
+    let midTerm = parseInt(prompt(" Nhập Vào Điểm Bài Giữa Kì : "));
+    let endOfTerm = parseInt(prompt(" Nhập vào Điểm Bài Cuối Kì : "));
+
+    let result = ( midTerm +endOfTerm * 2 )/3;
+    if (result<0 && result >10) {
+        alert("Mời Bạn Nhập Lại Điểm");
+    } else  if (result <5) {
+        alert(" Xếp Loại Kém ");
+    }else if (result<6.5) {
+        alert("Xếp Loại Trung Bình");
+    } else if ( result<8) {
+        alert("Xếp Loại Khá");
+    }else {
+        alert(" Xếp Loại Giỏi");
+    }
+
 </script>
 </body>
 </html>

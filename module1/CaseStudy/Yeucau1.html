@@ -1,38 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Ứng Dụng Quản Lý Khu nghỉ dưỡng Furama</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account</title>
+    <style>
+        * {
+            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
 </head>
 <body>
+<form action="" id="bookingForm">
+    <table>
+        <tr>
+            <td><label for="fullName">Họ và tên:</label></td>
+            <td><input type="text" name="fullName" id="fullName" /></td>
+        </tr>
+        <tr>
+            <td><label for="identityNumber">Số CMND:</label></td>
+            <td>
+                <input type="number" name="identityNumber" id="identityNumber" />
+            </td>
+        </tr>
+        <tr>
+            <td><label for="birthDay">Ngày sinh:</label></td>
+            <td><input type="date" name="birthDay" id="birthDay" /></td>
+        </tr>
+        <tr>
+            <td><label for="email">E-mail:</label></td>
+            <td><input type="email" name="email" id="email" /></td>
+        </tr>
+        <tr>
+            <td><label for="address">Địa chỉ:</label></td>
+            <td><input type="text" name="address" id="address" /></td>
+        </tr>
+        <tr>
+            <td><label for="customerType">Hạng thành viên:</label></td>
+            <td>
+                <select name="customerType" id="customerType">
+                    <option>Member</option>
+                    <option>Silver</option>
+                    <option>Gold</option>
+                    <option>Platinum</option>
+                    <option>Dimond</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="discoutRate">Giảm giá:</label></td>
+            <td><input type="number" name="discoutRate" id="discoutRate" /></td>
+        </tr>
+        <tr>
+            <td><label for="guestCount">Số lượng đi kèm:</label></td>
+            <td><input type="number" name="guestCount" id="guestCount" /></td>
+        </tr>
+        <tr>
+            <td><label for="rentDays">Số ngày thuê:</label></td>
+            <td><input type="number" name="rentDays" id="rentDays" /></td>
+        </tr>
+        <tr>
+            <td><label for="serviceType">Loại dịch vụ:</label></td>
+            <td>
+                <select name="serviceType" id="serviceType">
+                    <option>Room ($100/day)</option>
+                    <option>House ($300/day)</option>
+                    <option>Villa ($500/day)</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="roomType">Loại phòng:</label></td>
+            <td>
+                <select name="roomType" id="roomType">
+                    <option>Normal</option>
+                    <option>Business</option>
+                    <option>VIP</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <br />
+    <button type="button" onclick="showBookingInfo()">Tạm tính</button>
+</form>
 <script>
-    let name = prompt("Họ và Tên");
-    let idNumber = prompt("Số CMND");
-    let dateOfBirth = prompt("Ngày tháng năm sinh");
-    let mail = prompt("Email");
-    let address = prompt("Địa Chỉ");
-    let customer = prompt("Loại Customer (Diamond, Platinum, Gold, Silver, Member)");
-    let discount = prompt("Giảm giá");
-    let quantity = prompt("Số lượng đi kèm");
-    let rentDay = prompt("Số ngày thuê");
-    let service = prompt("Loại dịch vụ (Villa, House, Room)");
-    let room = prompt("Loại phòng thuê (Vip, Business,  Normal)");
-    switch (service) {
-        case service="Villa":
-            prices = 500;
-            break;
-        case service="House":
-            prices = 300;
-            break;
-        case service="Room":
-            prices = 100;
-            break;
+    function showBookingInfo() {
+        let fullName = document.getElementById("fullName").value;
+        let identityNumber = document.getElementById("identityNumber").value;
+        let birthDay = document.getElementById("birthDay").value;
+        let email = document.getElementById("email").value;
+        let address = document.getElementById("address").value;
+        let customerType = document.getElementById("customerType").value;
+        let discoutRate = parseInt(document.getElementById("discoutRate").value);
+        let guestCount = document.getElementById("guestCount").value;
+        let rentDays = parseInt(document.getElementById("rentDays").value);
+        let serviceType = document.getElementById("serviceType").value;
+        let roomType = document.getElementById("roomType").value;
+        let servicePrice;
+        switch (serviceType) {
+            case "Room ($100/day)":
+                servicePrice = 100;
+                break;
+            case "House ($300/day)":
+                servicePrice = 300;
+                break;
+            case "Villa ($500/day)":
+                servicePrice = 500;
+                break;
+        }
+        discoutRate = isNaN(discoutRate) ? 0 : discoutRate;
+        rentDays = isNaN(rentDays) ? 0 : rentDays;
+        let price = servicePrice * rentDays * (1 - discoutRate / 100);
+        let result = "<h2>Thông tin đặt phòng:</h2>";
+        result += "<p>Họ và tên: " + fullName + "</p>";
+        result += "<p>Số CMND: " + identityNumber + "</p>";
+        result += "<p>Ngày sinh: " + birthDay + "</p>";
+        result += "<p>E-mail: " + email + "</p>";
+        result += "<p>Địa chỉ: " + address + "</p>";
+        result += "<p>Hạng thành viên: " + customerType + "</p>";
+        result += "<p>Giảm giá: " + discoutRate + "%</p>";
+        result += "<p>Số lượng đi kèm: " + guestCount + "</p>";
+        result += "<p>Số ngày thuê: " + rentDays + "</p>";
+        result += "<p>Loại dịch vụ: " + serviceType + "</p>";
+        result += "<p>Loại phòng: " + roomType + "</p>";
+        result += "<h2>Tổng số tiền: " + price + "</h2>";
+        document.write(result);
     }
-    let pay = prices*rentDay*(1-discount/100);
-    alert("Họ và Tên: "+name+ "\n" +"Số CMND: "+idNumber+ "\n" + "Ngày tháng năm sinh: "+dateOfBirth+ "\n"+"Email: "+mail+ "\n"
-        + "Địa Chỉ: "+address+"\n"+"Loại Customer: "+customer+ "\n"+ "Giảm giá: "+discount+ "\n"
-        + "Số lượng đi kèm: "+quantity+ "\n"+ "Số ngày thuê: "+rentDay+"\n"+"Loại dịch vụ: "+service+ "\n"
-        +"Loại phòng thuê: "+room+ "\n"+ " Số tiền phải trả: "+pay+ "$");
 </script>
 </body>
-</html
+</html>
